@@ -1,0 +1,26 @@
+{
+  "descripcion": "Reglas de arquitectura de Biblioteca Bogota. Cada regla nace de un ADR. El pipeline las verifica en cada cambio.",
+  "reglas": [
+    {
+      "id": "R1",
+      "adr": "ADR-001",
+      "modulo": "catalogo",
+      "no_puede_importar": ["prestamos", "multas", "notificaciones"],
+      "porque": "La gente tiene que poder seguir viendo que libros hay aunque el cobro de la caucion o los avisos esten fallando."
+    },
+    {
+      "id": "R2",
+      "adr": "ADR-002",
+      "modulo": "multas",
+      "no_puede_importar": ["notificaciones"],
+      "porque": "Si el correo se cae, el cobro de la caucion no se puede caer. Un aviso que falla no puede dejar a la biblioteca sin cobrar ni al usuario sin su prestamo."
+    },
+    {
+      "id": "R3",
+      "adr": "ADR-002",
+      "modulo": "nucleo",
+      "no_puede_importar": ["catalogo", "prestamos", "multas", "notificaciones"],
+      "porque": "Los datos y el canal de avisos sirven a todos. Si dependieran de un modulo en particular, un problema en ese modulo se contagiaria a todos los demas."
+    }
+  ]
+}
